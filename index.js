@@ -52,6 +52,17 @@ app.get('/', function (req, res) {
 
 //   const sql = 'INSERT INTO company (name, email, password)  VALUES($1, $2, $3)'
 
+// db.query(`CREATE TABLE realizations (
+//     id SERIAL PRIMARY KEY,
+//     title text, 
+//     description text,
+//     created_at text
+//     )`).then(() => {
+//     console.log('Realization table created successfully!');
+//     }).catch((err) => {
+//     console.error('Error creating realizations table:', err);
+// })
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const PagesController = require('./controllers/PagesController')
