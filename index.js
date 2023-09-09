@@ -63,6 +63,18 @@ app.get('/', function (req, res) {
 //     console.error('Error creating realizations table:', err);
 // })
 
+// db.query(`CREATE TABLE images (
+//     id SERIAL PRIMARY KEY,
+//     realizationId integer,
+//     position integer, 
+//     description text,
+//     created_at text
+//     )`).then(() => {
+//     console.log('Images table created successfully!');
+//     }).catch((err) => {
+//     console.error('Error creating images table:', err);
+// })
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const PagesController = require('./controllers/PagesController')
