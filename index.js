@@ -66,7 +66,8 @@ app.get('/', function (req, res) {
 // db.query(`CREATE TABLE images (
 //     id SERIAL PRIMARY KEY,
 //     realizationId integer,
-//     position integer, 
+//     position integer,
+//     image bytea,
 //     description text,
 //     created_at text
 //     )`).then(() => {
@@ -74,6 +75,10 @@ app.get('/', function (req, res) {
 //     }).catch((err) => {
 //     console.error('Error creating images table:', err);
 // })
+
+// db.query(
+//     'DROP TABLE images'
+// )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

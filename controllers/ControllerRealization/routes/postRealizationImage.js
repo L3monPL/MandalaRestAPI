@@ -14,55 +14,44 @@ router.post("/:id/image/:position", bodyParser.raw({type: ['image/jpeg', 'image/
     // const imageBuffer = req.file?.buffer
     // let base64data = imageBuffer.toString('base64');
     // console.log(base64data)
+    let paramId = Number(req.params.id)
+    let paramPosition = Number(req.params.position)
+    var imageUpload = req.body
 
-    console.log(typeof req.body)
-    fs.writeFileSync('image.png', req.body)
+    console.log(req.body)
+    console.log(paramId)
+    console.log(paramPosition)
+    // fs.writeFileSync('image.png', req.body)
 
 
-    // if(!req.body.image){
-    //     errors.push("Nie dodano zdjęcia")
-    // }
-    // if(!req.body.position){
-    //     errors.push("Nie podano pozycji zdjęcia")
-    // }
-    // if(!req.body.imageCount){
-    //     errors.push("Nie podano liczby zdjęć")
-    // }
-    
-    // add weblink
-    // if (errors.length) {
-    //     res.status(400).json({"error": errors.join(",")})
-    //     return
-    // }
+    if(!req.body){
+        errors.push("Nie dodano zdjęcia")
+    }
+    if(!paramPosition){
+        errors.push("Nie podano pozycji zdjęcia")
+    }
+
     let created_at = Date()
 
-    // let data={
-    //     title:req.body.title,
-    //     description:req.body.description,
-    //     // imageCount:req.body.imageCount,
-    //     created_at: created_at
-    // }
-    // let lastInsertOfferId
-    // try{
-    //     // // let param = [req.params.id]
+    var data = {
+        image: req.body,
+        position: paramPosition,
+        realizationId: paramId,
+        created_at: created_at
+    }
 
-    //     // let body =[data.title, data.description, data.created_at,]
-    //     // let returnOfferRow = await db.query("INSERT INTO realizations(title, description, created_at) VALUES ($1,$2,$3)RETURNING id",body)
-        
-    //     // // console.log(experiences)
-    //     // lastInsertOfferId = returnOfferRow.rows[0].id;
+    try{
+        let body = [data.realizationId, data.position, data.image, data.created_at]
+        await db.query("INSERT INTO images(realizationId, position, image, created_at) VALUES ($1,$2,$3,$4)",body)
 
+    }catch (error) {
+        res.status(400).json({"error": error.message})
         
+        return;
+    }
 
-        
-
-    // }catch (error) {
-    //     res.status(400).json({"error": error.message})
-        
-    //     return;
-    // }
     res.json({
-        "message": 0
+        "message": 'Dodano zdjęcie'
     })
     
 });
