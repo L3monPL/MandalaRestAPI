@@ -6,8 +6,9 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.post("/:id/image/:position", upload.single('image'), async(req, res, next) =>{
     var errors = []
-    const { buffer } = req.file;
-    console.log(buffer)
+    // const { buffer } = req.file;
+    const imageBuffer = req.file?.buffer
+    console.log(req.file)
     // if(!req.body.image){
     //     errors.push("Nie dodano zdjęcia")
     // }
@@ -51,7 +52,7 @@ router.post("/:id/image/:position", upload.single('image'), async(req, res, next
     //     return;
     // }
     res.json({
-        "message": 0
+        "message": imageBuffer
     })
     
 });
