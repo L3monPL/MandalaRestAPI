@@ -36,7 +36,7 @@ router.post("/login", async(req, res, next) =>{
             return
         }
         if (currentUserEmail) {
-            let currentUserLoginPassword = await db.query("SELECT email, password, id FROM users WHERE email = $1 AND password = $2",[data.email, data.password])
+            let currentUserLoginPassword = await db.query("SELECT email, id FROM users WHERE email = $1 AND password = $2",[data.email, data.password])
             var currentUserPassword = currentUserLoginPassword.rowCount
             var currentLoginUser = currentUserLoginPassword.rows[0]
             if (!currentUserPassword) {
