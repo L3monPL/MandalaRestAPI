@@ -9,6 +9,7 @@ const postRealization = require('./routes/postRealization')
 const postRealizationImage = require('./routes/postRealizationImage')
 
 const deleteRealizationImage = require('./routes/deleteRealizationImage')
+const deleteRealization = require('./routes/deleteRealization')
 
 
 
@@ -19,6 +20,7 @@ controllerRealization.use('/', postRealization)
 controllerRealization.use('/', postRealizationImage)
 
 controllerRealization.use('/', deleteRealizationImage)
+controllerRealization.use('/', deleteRealization)
 
 
 
