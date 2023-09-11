@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs')
 
 
-router.post("/:id/image/:position", bodyParser.raw({type: ['image/jpeg', 'image/png'], limit: '10mb'}), async(req, res, next) =>{
+router.post("/:id/image/:position", bodyParser.raw({type: ['image/jpeg', 'image/png'], limit: '7mb'}), async(req, res, next) =>{
     var errors = []
     // const { buffer } = req.file;
     // const imageBuffer = req.file?.buffer

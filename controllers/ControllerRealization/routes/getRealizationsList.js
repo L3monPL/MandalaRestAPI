@@ -14,25 +14,18 @@ router.get("", async (req, res) => {
 
       for (let index = 0; index < rows.length; index++) {
         
-        let listImage = []
-
-        for (let index = 0; index < rows.length; index++) {
-          let imageObject = await db.query('SELECT id, realizationId, position, description, created_at FROM images WHERE realizationId = $1', [rows[index].id]);
-          listImage.push(imageObject.rows[0])
-        }
-
-        // console.log(imageObject)
+        let imageObject = await db.query('SELECT id, realizationId, position, description, created_at FROM images WHERE realizationId = $1', [rows[index].id]);
 
         list.push({
           id: rows[index].id,
           title: rows[index].title,
           description: rows[index].description,
-          images: listImage,
+          images: imageObject.rows,
           created_at: rows[index].created_at
         })
       }
 
-      console.log(list)
+      // console.log(list)
 
       res.send(list);
     } catch (error) {
