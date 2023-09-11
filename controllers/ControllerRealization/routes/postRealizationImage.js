@@ -3,14 +3,22 @@ const router = express.Router();
 const db = require('../../../db');
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
+const { Bloob } = require('buffer');
+const bodyParser = require('body-parser');
+const fs = require('fs')
 
-router.post("/:id/image/:position", upload.single('image'), async(req, res, next) =>{
+
+router.post("/:id/image/:position", bodyParser.raw({type: ['image/jpeg', 'image/png'], limit: '10mb'}), async(req, res, next) =>{
     var errors = []
     // const { buffer } = req.file;
-    const imageBuffer = req.file?.buffer
-    let base64data = imageBuffer.toString('base64');
-    console.log(base64data)
-    // console.log(req.file)
+    // const imageBuffer = req.file?.buffer
+    // let base64data = imageBuffer.toString('base64');
+    // console.log(base64data)
+
+    console.log(typeof req.body)
+    fs.writeFileSync('image.png', req.body)
+
+
     // if(!req.body.image){
     //     errors.push("Nie dodano zdjęcia")
     // }
@@ -54,7 +62,7 @@ router.post("/:id/image/:position", upload.single('image'), async(req, res, next
     //     return;
     // }
     res.json({
-        "message": base64data
+        "message": 0
     })
     
 });
