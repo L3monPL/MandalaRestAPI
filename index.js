@@ -30,9 +30,9 @@ function authenticateJWT(req, res, next) {
     });
 }
 
-app.use('/api', authenticateJWT);
+app.use('/api/realizations/private', authenticateJWT);
 
-app.get('/api', authenticateJWT, (req, res) => {
+app.get('/api/realizations/private', authenticateJWT, (req, res) => {
     // res.json({ message: 'You have access to this protected route' });
 });
 
