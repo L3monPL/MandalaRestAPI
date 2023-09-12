@@ -3,6 +3,7 @@ const db = require('./db');
 const bodyParser = require('body-parser')
 const ACCESS_TOKEN = 'gfdssdff43f45f45fe3as45e4wfs656f45'
 const app = express()
+const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.text())
 app.use(bodyParser.urlencoded({ extended: true }));
