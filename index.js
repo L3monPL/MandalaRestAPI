@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('./db');
 const bodyParser = require('body-parser')
-
+const ACCESS_TOKEN = 'gfdssdff43f45f45fe3as45e4wfs656f45'
 const app = express()
 
 app.use(bodyParser.text())
@@ -12,7 +12,29 @@ app.get('/', function (req, res) {
     res.send('Witaj!');
 });
   
+// Middleware for JWT authentication
+function authenticateJWT(req, res, next) {
+    const token = req.header('Authorization');
+  
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  
+    jwt.verify(token, ACCESS_TOKEN, (err, user) => {
+      if (err) {
+        return res.status(403).json({ message: 'Invalid token' });
+      }
+  
+      req.user = user;
+      next();
+    });
+}
 
+app.use('/api', authenticateJWT);
+
+app.get('/api', authenticateJWT, (req, res) => {
+    // res.json({ message: 'You have access to this protected route' });
+});
 
 
 
