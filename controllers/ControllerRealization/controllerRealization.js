@@ -16,11 +16,11 @@ const deleteRealization = require('./routes/deleteRealization')
 controllerRealization.use('/', getRealizationsList)
 controllerRealization.use('/', getRealizationImage)
 
-controllerRealization.use('/', postRealization)
-controllerRealization.use('/', postRealizationImage)
+controllerRealization.use('/private/', postRealization)
+controllerRealization.use('/private/', postRealizationImage)
 
-controllerRealization.use('/', deleteRealizationImage)
-controllerRealization.use('/', deleteRealization)
+controllerRealization.use('/private/', deleteRealizationImage)
+controllerRealization.use('/private/', deleteRealization)
 
 
 

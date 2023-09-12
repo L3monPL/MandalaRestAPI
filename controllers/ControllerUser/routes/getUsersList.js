@@ -7,7 +7,7 @@ const db = require('../../../db');
 router.get("", async (req, res) => {
     try {
       // query the database to retrieve all data from the "users" table
-      const { rows } = await db.query('SELECT * FROM users');
+      const { rows } = await db.query('SELECT id, email, created_at FROM users');
       // send the retrieved data as the response
       res.send(rows);
     } catch (error) {

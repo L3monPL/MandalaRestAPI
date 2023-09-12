@@ -10,6 +10,7 @@ api.use(morgan('dev'))
 
 api.use('/users', controllerUser)
 api.use('/realizations', controllerRealization)
+// api.use('/realizations', controllerRealization)
 // api.use('/companyoffer', controllerCompanyOffer)
 
 module.exports = api;
