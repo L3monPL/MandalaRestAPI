@@ -26,6 +26,8 @@ services:
   backend:
     image: "backend:1.0"
     restart: always
+    depends_on:
+      - db
     environment:
       - TZ=${TZ}
       - DB_USER=${DB_USER}
