@@ -48,11 +48,9 @@ app.get('/api/realizations/private', authenticateJWT, (req, res) => {
 
 
 
-//   const sql = 'INSERT INTO users (email, password)  VALUES($1, $2)'
-
+// const sql = 'INSERT INTO users (email, password)  VALUES($1, $2)'
 // db.query(sql,["biuro@mandalanieruchomosci.pl", "mandala123321"], (err) => {
 //     if(err) return console.error(err.message)
-
 //     console.log("A new row has been created")
 // })
 
@@ -72,8 +70,6 @@ app.get('/api/realizations/private', authenticateJWT, (req, res) => {
 //     }).catch((err) => {
 //     console.error('Error creating users table:', err);
 // })
-
-//   const sql = 'INSERT INTO company (name, email, password)  VALUES($1, $2, $3)'
 
 // db.query(`CREATE TABLE realizations (
 //     id SERIAL PRIMARY KEY,
