@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+  traefik:
+    image: "traefik:v3.0"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik/conf-dynamic:/etc/traefik/conf-dynamic/
+      - ./traefik/acme:/etc/traefik/acme
+    restart: always
+    environment:
+      - TZ=${TZ}
+    networks:
+      - mandala
+
+  web:
+    image: "frontend:1.0"
+    restart: always
+    environment:
+      - TZ=${TZ}
+    networks:
+      - mandala
+
+  backend:
+    image: "backend:1.0"
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - DB_USER=${DB_USER}
+      - DB_HOST=${DB_HOST}
+      - DB=${DB}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+    networks:
+      - mandala
+
+  db:
+    image: postgres:15.4
+    restart: always
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - TZ=${TZ}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB}
+
+networks:
+  mandala:
+    name: mandala
+    driver: bridge
+
+volumes:
+  db-volume:
+
+
+    
