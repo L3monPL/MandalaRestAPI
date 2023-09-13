@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../../db');
 const jwt = require('jsonwebtoken');
-const ACCESS_TOKEN = 'gfdssdff43f45f45fe3as45e4wfs656f45'
+require('dotenv').config();
 
 
 router.get("/auth", async (req, res) => {
 
     const token = req.header('Authorization');
 
-    jwt.verify(token, ACCESS_TOKEN, (err, decoded) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
         if (err) {
           return res.status(401).json({ message: 'Authentication failed' });
         }

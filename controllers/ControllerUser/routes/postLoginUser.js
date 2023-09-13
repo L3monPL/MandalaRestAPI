@@ -2,8 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const db = require('../../../db');
+require('dotenv').config();
 
-const ACCESS_TOKEN = 'gfdssdff43f45f45fe3as45e4wfs656f45'
 
 router.post("/login", async(req, res, next) =>{
     var errors = []
@@ -63,7 +63,7 @@ router.post("/login", async(req, res, next) =>{
         //     "currentUserEmail": currentUserEmail
         // }
 
-        var token = jwt.sign(currentLoginUser, ACCESS_TOKEN)
+        var token = jwt.sign(currentLoginUser, process.env.ACCESS_TOKEN)
 
     } catch (error) {
         console.error(error)

@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('./db');
 const bodyParser = require('body-parser')
-const ACCESS_TOKEN = 'gfdssdff43f45f45fe3as45e4wfs656f45'
+require('dotenv').config();
 const app = express()
 const jwt = require('jsonwebtoken');
 
@@ -21,7 +21,7 @@ function authenticateJWT(req, res, next) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
   
-    jwt.verify(token, ACCESS_TOKEN, (err, user) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
       if (err) {
         return res.status(403).json({ message: 'Invalid token' });
       }
@@ -82,6 +82,10 @@ app.get('/api/realizations/private', authenticateJWT, (req, res) => {
 //     console.error('Error creating realizations table:', err);
 // })
 
+// db.query(
+//     'DROP TABLE realizations'
+// )
+
 // db.query(`CREATE TABLE images (
 //     id SERIAL PRIMARY KEY,
 //     realizationId integer,
@@ -98,6 +102,19 @@ app.get('/api/realizations/private', authenticateJWT, (req, res) => {
 // db.query(
 //     'DROP TABLE images'
 // )
+
+// db.query(`CREATE TABLE messages (
+//     id SERIAL PRIMARY KEY,
+//     title text, 
+//     name text,
+//     email text,
+//     description text,
+//     created_at text
+//     )`).then(() => {
+//     console.log('Realization table created successfully!');
+//     }).catch((err) => {
+//     console.error('Error creating messages table:', err);
+// })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
