@@ -4,13 +4,13 @@ const morgan = require('morgan')
 
 const controllerUser = require('./ControllerUser/controllerUser')
 const controllerRealization = require('./ControllerRealization/controllerRealization')
-// const controllerCompanyOffer = require('./controllerCompanyOffer/controllerCompanyOffer')
+const controllerMessage = require('./ControllerMessage/controllerMessage')
 
 api.use(morgan('dev'))
 
 api.use('/users', controllerUser)
 api.use('/realizations', controllerRealization)
-// api.use('/realizations', controllerRealization)
+api.use('/message', controllerMessage)
 // api.use('/companyoffer', controllerCompanyOffer)
 
 module.exports = api;
