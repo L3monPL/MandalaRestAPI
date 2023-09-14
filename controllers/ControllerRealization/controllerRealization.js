@@ -3,6 +3,7 @@ const express = require('express');
 const controllerRealization = express.Router();
 
 const getRealizationsList = require('./routes/getRealizationsList')
+const getRealizationsListPaginator = require('./routes/getRealizationListPaginator')
 const getRealizationImage = require('./routes/getRealizationImage')
 
 const postRealization = require('./routes/postRealization')
@@ -14,6 +15,7 @@ const deleteRealization = require('./routes/deleteRealization')
 
 
 controllerRealization.use('/', getRealizationsList)
+controllerRealization.use('/', getRealizationsListPaginator)
 controllerRealization.use('/', getRealizationImage)
 
 controllerRealization.use('/private/', postRealization)
