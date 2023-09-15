@@ -39,7 +39,7 @@ router.post("", async(req, res, next) =>{
 
     // text = email + name + 'napisał/a:' + text
 
-    let to = 'minecarftmikas04@gmail.com'
+    let to = 'biuro@mandalanieruchomosci.com'
 
     let subject = 'Wiadomość z formularza www.mandalanieruchomosci.com'
 
