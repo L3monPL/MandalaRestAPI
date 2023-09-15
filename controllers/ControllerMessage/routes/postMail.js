@@ -6,12 +6,12 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
-    host: 'smtp.gmail.com',
-    port: 587,
+    // host: 'smtp.gmail.com',
+    port: 465,
     secure: true,
     auth: {
       user: 'mikolaj.andrzejewski999@gmail.com',
-      pass: 'fgdfgdfgdfdfgdf',
+      pass: 'mkbvwyitjqtjhkza',
     },
   });
 
@@ -21,6 +21,7 @@ const transporter = nodemailer.createTransport({
 router.post("", async(req, res, next) =>{
 
     const emailSchema = Joi.object({
+        name: Joi.string().required(),
         email: Joi.string().required(),
         text: Joi.string().required(),
     });
@@ -34,27 +35,41 @@ router.post("", async(req, res, next) =>{
 
     var errors = []
 
-    const { text } = req.body;
+    let { text,  name, email} = req.body;
+
+    // text = email + name + 'napisał/a:' + text
 
     let to = 'minecarftmikas04@gmail.com'
 
-    let subject = 'Wiadomość z formularza www.mandalanieruchomosci.pl'
+    let subject = 'Wiadomość z formularza www.mandalanieruchomosci.com'
 
     const mailOptions = {
         from: 'mikolaj.andrzejewski999@gmail.com',
         to,
         subject,
-        text,
+        html:`
+            <html>
+                <head>
+                    <title>${subject}</title>
+                </head>
+                <body>
+                    <h2>Wiadomość z formularza</h2>
+                    <p>Wiadomość od użytkownika: ${name}</p>
+                    <p>Adres e-mail użytkownika: ${email}</p>
+                    <p>Wiadomość: ${text}</p>
+                </body>
+            </html>
+        `,
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
           console.error(err);
-          res.status(500).send('Email could not be sent');
+          res.status(500).send({message: 'Wiadomość nie została wysłana'});
           return
         } else {
           console.log('Email sent: ' + info.response);
-          res.send('Email sent successfully');
+          res.send({message: 'Dziękujemy za wysłanie wiadomości'});
           return
         }
     });
